@@ -8,11 +8,18 @@ const gameBoard = (() => {
   };
 
   const updateDisplay = () => {
-    const boardSpaces = document.querySelectorAll('.board-space');
+    const boardSpaces = document.querySelectorAll('.board-space p');
 
     for (let i = 0; i <= 8; i += 1) {
       boardSpaces[i].textContent = board[i];
     }
+    boardSpaces.forEach((boardSpace) => {
+      if (boardSpace.textContent === 'X') {
+        boardSpace.classList.add('x');
+      } else if (boardSpace.textContent === 'O') {
+        boardSpace.classList.add('o');
+      }
+    });
   };
 
   const checkWinner = () => {
