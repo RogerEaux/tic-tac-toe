@@ -1,40 +1,48 @@
 const gameBoard = (() => {
   const board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-  const boardSpaces = document.querySelectorAll('.board-space');
-  let turn = 1;
 
   const displayBoard = () => {};
 
-  const updateBoard = function updateBoard() {
-    const position = this.dataset.space;
-    if (turn % 2 === 0) {
-      board[position] = 'o';
-    } else {
-      board[position] = 'x';
-    }
-    turn += 1;
+  const updateBoard = (space, symbol) => {
+    const position = space.dataset.space;
+    board[position] = symbol;
     console.log(board);
-    displayBoard();
   };
 
-  boardSpaces.forEach((boardSpace) => {
-    boardSpace.addEventListener('click', updateBoard);
-  });
-
-  return { updateBoard };
+  return { updateBoard, displayBoard };
 })();
 
 const player = (symbol) => {
-  const identifySelf = () => {
-    console.log(`I am ${symbol} player`);
-  };
-
-  return { identifySelf };
+  const getSymbol = () => symbol;
+  return { getSymbol };
 };
 
 const game = (() => {
   const xPlayer = player('x');
   const oPlayer = player('o');
+  const boardSpaces = document.querySelectorAll('.board-space');
+  let turn = 1;
 
-  return {};
+  const playRound = function playRound() {
+    let symbol;
+
+    if (turn % 2 === 0) {
+      symbol = xPlayer.getSymbol();
+    } else {
+      symbol = oPlayer.getSymbol();
+    }
+    gameBoard.updateBoard(this, symbol);
+    this.removeEventListener('click', playRound);
+    turn += 1;
+  };
+
+  const initialize = () => {
+    boardSpaces.forEach((boardSpace) => {
+      boardSpace.addEventListener('click', playRound);
+    });
+  };
+
+  return { initialize };
 })();
+
+game.initialize();
