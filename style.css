@@ -15,6 +15,7 @@
 }
 
 html {
+  --border: 2px solid black;
   font-family: Gloria, Helvetica, sans-serif;
 }
 
@@ -24,14 +25,36 @@ body {
   height: 100vh;
 }
 
+.header {
+  text-align: center;
+  padding: 48px;
+}
+
 .main {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  align-items: center;
 }
 
 .board {
+  height: 300px;
+  width: 300px;
   font-family: Cornetta, Helvetica, sans-serif;
+  display: grid;
+  grid-template: 100px 100px 100px / 100px 100px 100px;
+  justify-content: center;
+}
+
+.board-space {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer {
   font-family: Helvetica, sans-serif;
+  text-align: center;
+  padding: 16px;
 }
