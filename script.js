@@ -41,17 +41,22 @@ const game = (() => {
     return symbol;
   };
 
-  const playRound = function playRound() {
+  const changeMessage = () => {
     const message = document.querySelector('.message');
-    turn += 1;
-    message.textContent = `${symbol.toUpperCase()} player's turn`;
+
+    message.textContent = `${getCurrentSymbol().toUpperCase()} player's turn`;
     if (turn > 9) {
       message.textContent = 'Game over! Tie.';
     }
-    gameBoard.updateBoard(this, symbol);
+  };
+
+  const playRound = function playRound() {
+    gameBoard.updateBoard(this, getCurrentSymbol());
     this.removeEventListener('click', playRound);
     gameBoard.updateDisplay();
     gameBoard.checkWinner();
+    turn += 1;
+    changeMessage();
   };
 
   const start = () => {
