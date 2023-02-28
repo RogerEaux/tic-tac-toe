@@ -1,20 +1,23 @@
 const gameBoard = (() => {
   const board = ['', '', '', '', '', '', '', '', ''];
 
-  const updateDisplay = () => {
-    const boardSpaces = document.querySelectorAll('.board-space');
-    for (let i = 0; i <= 8; i += 1) {
-      boardSpaces[i].textContent = board[i];
-    }
-  };
-
   const updateBoard = (space, symbol) => {
     const position = space.dataset.space;
 
     board[position] = symbol;
   };
 
-  return { updateBoard, updateDisplay };
+  const updateDisplay = () => {
+    const boardSpaces = document.querySelectorAll('.board-space');
+
+    for (let i = 0; i <= 8; i += 1) {
+      boardSpaces[i].textContent = board[i];
+    }
+  };
+
+  const checkWinner = () => {};
+
+  return { updateBoard, updateDisplay, checkWinner };
 })();
 
 const player = (symbol) => {
@@ -28,24 +31,36 @@ const game = (() => {
   const boardSpaces = document.querySelectorAll('.board-space');
   let turn = 1;
 
-  const playRound = function playRound() {
-    let symbol = oPlayer.getSymbol();
-    if (turn % 2 === 1) {
-      symbol = xPlayer.getSymbol();
+  const getCurrentSymbol = () => {
+    let symbol = xPlayer.getSymbol();
+
+    if (turn % 2 === 0) {
+      symbol = oPlayer.getSymbol();
     }
+
+    return symbol;
+  };
+
+  const playRound = function playRound() {
+    const message = document.querySelector('.message');
     turn += 1;
+    message.textContent = `${symbol.toUpperCase()} player's turn`;
+    if (turn > 9) {
+      message.textContent = 'Game over! Tie.';
+    }
     gameBoard.updateBoard(this, symbol);
     this.removeEventListener('click', playRound);
     gameBoard.updateDisplay();
+    gameBoard.checkWinner();
   };
 
-  const initialize = () => {
+  const start = () => {
     boardSpaces.forEach((boardSpace) => {
       boardSpace.addEventListener('click', playRound);
     });
   };
 
-  return { initialize };
+  return { start };
 })();
 
-game.initialize();
+game.start();
