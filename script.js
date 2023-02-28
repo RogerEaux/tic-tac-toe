@@ -15,7 +15,36 @@ const gameBoard = (() => {
     }
   };
 
-  const checkWinner = () => {};
+  const checkWinner = () => {
+    for (let i = 0; i < 3; i += 1) {
+      if (
+        board[i] !== '' &&
+        board[i] === board[i + 3] &&
+        board[i] === board[i + 6]
+      ) {
+        return board[i];
+      }
+    }
+
+    for (let i = 0; i < 9; i += 3) {
+      if (
+        board[i] !== '' &&
+        board[i] === board[i + 1] &&
+        board[i] === board[i + 2]
+      ) {
+        return board[i];
+      }
+    }
+
+    if (
+      (board[0] !== '' && board[0] === board[4] && board[0] === board[8]) ||
+      (board[2] !== '' && board[2] === board[4] && board[2] === board[6])
+    ) {
+      return board[4];
+    }
+
+    return '';
+  };
 
   return { updateBoard, updateDisplay, checkWinner };
 })();
@@ -42,9 +71,12 @@ const game = (() => {
   };
 
   const getMessage = () => {
+    const winner = gameBoard.checkWinner();
     let message = `${getCurrentSymbol().toUpperCase()} player's turn`;
 
-    if (turn > 9) {
+    if (winner) {
+      message = `${winner} wins!`;
+    } else if (turn > 9) {
       message = 'Game over! Tie.';
     }
 
@@ -61,9 +93,13 @@ const game = (() => {
     gameBoard.updateBoard(this, getCurrentSymbol());
     this.removeEventListener('click', playRound);
     gameBoard.updateDisplay();
-    gameBoard.checkWinner();
     turn += 1;
     changeMessage(getMessage());
+    if (gameBoard.checkWinner()) {
+      boardSpaces.forEach((boardSpace) => {
+        boardSpace.removeEventListener('click', playRound);
+      });
+    }
   };
 
   const start = () => {
