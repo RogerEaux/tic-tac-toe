@@ -26,8 +26,8 @@ const player = (symbol) => {
 };
 
 const game = (() => {
-  const xPlayer = player('x');
-  const oPlayer = player('o');
+  const xPlayer = player('X');
+  const oPlayer = player('O');
   const boardSpaces = document.querySelectorAll('.board-space');
   let turn = 1;
 
@@ -41,13 +41,20 @@ const game = (() => {
     return symbol;
   };
 
-  const changeMessage = () => {
-    const message = document.querySelector('.message');
+  const getMessage = () => {
+    let message = `${getCurrentSymbol().toUpperCase()} player's turn`;
 
-    message.textContent = `${getCurrentSymbol().toUpperCase()} player's turn`;
     if (turn > 9) {
-      message.textContent = 'Game over! Tie.';
+      message = 'Game over! Tie.';
     }
+
+    return message;
+  };
+
+  const changeMessage = (message) => {
+    const messageDisplay = document.querySelector('.message');
+
+    messageDisplay.textContent = message;
   };
 
   const playRound = function playRound() {
@@ -56,7 +63,7 @@ const game = (() => {
     gameBoard.updateDisplay();
     gameBoard.checkWinner();
     turn += 1;
-    changeMessage();
+    changeMessage(getMessage());
   };
 
   const start = () => {
