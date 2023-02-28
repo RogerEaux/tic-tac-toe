@@ -1,0 +1,23 @@
+@font-face {
+  font-family: Cornetta;
+  src: url(./fonts/Cornetta-EaLVn.ttf);
+}
+
+@font-face {
+  font-family: Gloria;
+  src: url(./fonts/GloriaHallelujah.ttf);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Gloria, Helvetica, sans-serif;
+}
+
+.board {
+  font-family: Cornetta, Helvetica, sans-serif;
+}
