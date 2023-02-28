@@ -1,15 +1,17 @@
 const gameBoard = (() => {
   const board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  const displayBoard = () => {};
-
   const updateBoard = (space, symbol) => {
     const position = space.dataset.space;
+    const content = document.createElement('p');
+    content.classList.add('symbol');
+    content.textContent = symbol;
+
     board[position] = symbol;
-    console.log(board);
+    space.appendChild(content);
   };
 
-  return { updateBoard, displayBoard };
+  return { updateBoard };
 })();
 
 const player = (symbol) => {
@@ -24,13 +26,11 @@ const game = (() => {
   let turn = 1;
 
   const playRound = function playRound() {
-    let symbol;
-
-    if (turn % 2 === 0) {
+    let symbol = oPlayer.getSymbol();
+    if (turn % 2 === 1) {
       symbol = xPlayer.getSymbol();
-    } else {
-      symbol = oPlayer.getSymbol();
     }
+
     gameBoard.updateBoard(this, symbol);
     this.removeEventListener('click', playRound);
     turn += 1;
