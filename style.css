@@ -19,12 +19,14 @@ html {
   --blue: #3f00ff;
   --gray: #202020;
   --border: 2px solid var(--gray);
+  --darker-green: #40b5ad;
   font-family: Gloria, Helvetica, sans-serif;
   background-color: aquamarine;
   color: #202020;
 }
 
 body {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -104,10 +106,35 @@ body {
   border-top: var(--border);
 }
 
+.start {
+  width: 100vw;
+  position: absolute;
+  top: 45vh;
+  display: flex;
+  justify-content: center;
+}
+
+.start button {
+  appearance: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background-color: var(--darker-green);
+  color: var(--gray);
+  border: 4px solid var(--gray);
+  border-radius: 8px;
+  padding: 16px 48px;
+}
+
+.start button:hover {
+  background-color: var(--gray);
+  color: var(--darker-green);
+  border: 4px solid var(--darker-green);
+}
+
 .footer {
   font-family: Helvetica, sans-serif;
   font-size: 1.2rem;
   text-align: center;
-  padding: 16px;
+  padding: 24px;
   font-weight: 700;
 }
