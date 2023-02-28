@@ -18,6 +18,20 @@ html {
   font-family: Gloria, Helvetica, sans-serif;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  flex: 1;
+}
+
 .board {
   font-family: Cornetta, Helvetica, sans-serif;
+}
+
+.footer {
+  font-family: Helvetica, sans-serif;
 }
