@@ -15,10 +15,13 @@
 }
 
 html {
-  --border: 2px solid black;
   --red: #d2042d;
   --blue: #3f00ff;
+  --gray: #202020;
+  --border: 2px solid var(--gray);
   font-family: Gloria, Helvetica, sans-serif;
+  background-color: aquamarine;
+  color: #202020;
 }
 
 body {
@@ -28,15 +31,19 @@ body {
 }
 
 .header {
+  font-size: 1.5rem;
   text-align: center;
   padding: 48px;
 }
 
 .main {
+  visibility: hidden;
   display: flex;
   flex-direction: column;
   flex: 1;
   align-items: center;
+  font-size: 1.2rem;
+  margin-top: 32px;
 }
 
 .board {
@@ -99,6 +106,7 @@ body {
 
 .footer {
   font-family: Helvetica, sans-serif;
+  font-size: 1.2rem;
   text-align: center;
   padding: 16px;
   font-weight: 700;
