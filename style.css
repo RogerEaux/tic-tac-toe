@@ -16,6 +16,8 @@
 
 html {
   --border: 2px solid black;
+  --red: #d2042d;
+  --blue: #3f00ff;
   font-family: Gloria, Helvetica, sans-serif;
 }
 
@@ -44,6 +46,7 @@ body {
   display: grid;
   grid-template: 100px 100px 100px / 100px 100px 100px;
   justify-content: center;
+  margin-top: 32px;
 }
 
 .board-space {
@@ -51,10 +54,52 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 4rem;
+}
+
+.x {
+  color: var(--red);
+}
+
+.o {
+  color: var(--blue);
+}
+
+.board-space:nth-child(5) {
+  border: var(--border);
+}
+
+.board-space:nth-child(1),
+.board-space:nth-child(2),
+.board-space:nth-child(4) {
+  border-right: var(--border);
+  border-bottom: var(--border);
+}
+
+.board-space:nth-child(2),
+.board-space:nth-child(3),
+.board-space:nth-child(6) {
+  border-left: var(--border);
+  border-bottom: var(--border);
+}
+
+.board-space:nth-child(4),
+.board-space:nth-child(7),
+.board-space:nth-child(8) {
+  border-right: var(--border);
+  border-top: var(--border);
+}
+
+.board-space:nth-child(6),
+.board-space:nth-child(8),
+.board-space:nth-child(9) {
+  border-left: var(--border);
+  border-top: var(--border);
 }
 
 .footer {
   font-family: Helvetica, sans-serif;
   text-align: center;
   padding: 16px;
+  font-weight: 700;
 }
