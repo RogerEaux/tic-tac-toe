@@ -115,6 +115,9 @@ const game = (() => {
   };
 
   const resetGame = () => {
+    const startButton = document.querySelector('.start');
+    const main = document.querySelector('.main');
+
     turn = 1;
     gameBoard.resetBoard();
     boardSpaces.forEach((boardSpace) => {
@@ -122,6 +125,9 @@ const game = (() => {
       boardSpace.addEventListener('click', playRound);
     });
     changeMessage("Let's play");
+    main.style.visibility = 'hidden';
+    startButton.style.visibility = 'visible';
+    startButton.style.top = '45vh';
   };
 
   const start = () => {
@@ -141,7 +147,8 @@ const clickStart = () => {
   const main = document.querySelector('.main');
 
   main.style.visibility = 'visible';
-  startButton.remove();
+  startButton.style.visibility = 'hidden';
+  startButton.style.top = '0px';
   game.start();
 };
 
