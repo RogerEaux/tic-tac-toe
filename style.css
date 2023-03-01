@@ -110,12 +110,15 @@ body {
   position: absolute;
   top: 45vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
 .restart button,
 .start button {
   appearance: none;
+  cursor: pointer;
   font-size: 1.5rem;
   font-weight: 700;
   background-color: var(--darker-green);
@@ -130,6 +133,49 @@ body {
   background-color: var(--gray);
   color: var(--darker-green);
   border: 4px solid var(--darker-green);
+}
+
+.switch {
+  position: relative;
+  height: 34px;
+  width: 60px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  background-color: var(--darker-green);
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: 0.4s;
+  border: var(--border);
+  border-radius: 34px;
+}
+
+.slider:before {
+  background-color: aquamarine;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  content: '';
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--gray);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
 
 .footer {
