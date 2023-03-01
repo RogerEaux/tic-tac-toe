@@ -1,4 +1,25 @@
-const gameBoard = (() => {
+const Player = (symbol) => {
+  const getSymbol = () => symbol;
+  return { getSymbol };
+};
+
+const AIPlayer = (() => {
+  const { getSymbol } = Player('o');
+
+  const makeMove = (board) => {
+    let choice;
+    while (board[choice] !== '') {
+      choice = Math.floor(Math.random() * 8);
+    }
+
+    return choice;
+  };
+
+  return { getSymbol, makeMove };
+})();
+
+const GameBoard = (() => {
+  const AI = document.getElementById('AICheck');
   let board = ['', '', '', '', '', '', '', '', ''];
 
   const updateBoard = (space, symbol) => {
@@ -58,17 +79,23 @@ const gameBoard = (() => {
     return '';
   };
 
-  return { resetBoard, updateBoard, updateDisplay, checkWinner };
+  const checkAI = (turn) => {
+    if (AI.checked && turn % 2 === 0 && turn < 10) {
+      const move = AIPlayer.makeMove(board);
+      const space = document.querySelector(
+        `.board-space[data-space="${move}"]`
+      );
+
+      space.click();
+    }
+  };
+
+  return { resetBoard, updateBoard, updateDisplay, checkWinner, checkAI };
 })();
 
-const player = (symbol) => {
-  const getSymbol = () => symbol;
-  return { getSymbol };
-};
-
-const game = (() => {
-  const xPlayer = player('X');
-  const oPlayer = player('O');
+const Game = (() => {
+  const xPlayer = Player('X');
+  const oPlayer = Player('O');
   const boardSpaces = document.querySelectorAll('.board-space');
   let turn = 1;
 
@@ -83,7 +110,7 @@ const game = (() => {
   };
 
   const getMessage = () => {
-    const winner = gameBoard.checkWinner();
+    const winner = GameBoard.checkWinner();
     let message = `${getCurrentSymbol().toUpperCase()} player's turn`;
 
     if (winner) {
@@ -102,16 +129,19 @@ const game = (() => {
   };
 
   const playRound = function playRound() {
-    gameBoard.updateBoard(this, getCurrentSymbol());
+    GameBoard.updateBoard(this, getCurrentSymbol());
     this.removeEventListener('click', playRound);
-    gameBoard.updateDisplay();
+    GameBoard.updateDisplay();
     turn += 1;
     changeMessage(getMessage());
-    if (gameBoard.checkWinner()) {
+    if (GameBoard.checkWinner()) {
       boardSpaces.forEach((boardSpace) => {
         boardSpace.removeEventListener('click', playRound);
       });
     }
+    setTimeout(() => {
+      GameBoard.checkAI(turn);
+    }, 1000);
   };
 
   const resetGame = () => {
@@ -119,7 +149,7 @@ const game = (() => {
     const main = document.querySelector('.main');
 
     turn = 1;
-    gameBoard.resetBoard();
+    GameBoard.resetBoard();
     boardSpaces.forEach((boardSpace) => {
       boardSpace.firstElementChild.removeAttribute('class');
       boardSpace.addEventListener('click', playRound);
@@ -152,7 +182,7 @@ const clickStart = () => {
     main.style.visibility = 'visible';
     startButton.style.top = '0';
   }, 1200);
-  game.start();
+  Game.start();
 };
 
 const startButton = document.querySelector('.start button');
