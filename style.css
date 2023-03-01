@@ -67,9 +67,9 @@ body {
 
 .x,
 .o {
+  color: var(--red);
   font-size: 4rem;
   transition: 0.4s;
-  color: var(--red);
 }
 
 .o {
