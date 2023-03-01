@@ -1,5 +1,5 @@
 const gameBoard = (() => {
-  const board = ['', '', '', '', '', '', '', '', ''];
+  let board = ['', '', '', '', '', '', '', '', ''];
 
   const updateBoard = (space, symbol) => {
     const position = space.dataset.space;
@@ -20,6 +20,11 @@ const gameBoard = (() => {
         boardSpace.classList.add('o');
       }
     });
+  };
+
+  const resetBoard = () => {
+    board = ['', '', '', '', '', '', '', '', ''];
+    updateDisplay();
   };
 
   const checkWinner = () => {
@@ -53,7 +58,7 @@ const gameBoard = (() => {
     return '';
   };
 
-  return { updateBoard, updateDisplay, checkWinner };
+  return { resetBoard, updateBoard, updateDisplay, checkWinner };
 })();
 
 const player = (symbol) => {
@@ -109,10 +114,22 @@ const game = (() => {
     }
   };
 
-  const start = () => {
+  const resetGame = () => {
+    turn = 1;
+    gameBoard.resetBoard();
     boardSpaces.forEach((boardSpace) => {
+      boardSpace.firstElementChild.removeAttribute('class');
       boardSpace.addEventListener('click', playRound);
     });
+  };
+
+  const start = () => {
+    const reset = document.querySelector('.restart');
+
+    boardSpaces.forEach((boardSpace) =>
+      boardSpace.addEventListener('click', playRound)
+    );
+    reset.addEventListener('click', resetGame);
   };
 
   return { start };
