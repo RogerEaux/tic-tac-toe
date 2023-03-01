@@ -35,7 +35,7 @@ body {
 .header {
   font-size: 1.5rem;
   text-align: center;
-  padding: 48px;
+  padding: 36px;
 }
 
 .main {
@@ -45,7 +45,6 @@ body {
   flex: 1;
   align-items: center;
   font-size: 1.2rem;
-  margin-top: 32px;
 }
 
 .board {
@@ -55,7 +54,7 @@ body {
   display: grid;
   grid-template: 100px 100px 100px / 100px 100px 100px;
   justify-content: center;
-  margin-top: 32px;
+  margin: 24px 0;
 }
 
 .board-space {
@@ -114,6 +113,7 @@ body {
   justify-content: center;
 }
 
+.restart button,
 .start button {
   appearance: none;
   font-size: 1.5rem;
@@ -125,6 +125,7 @@ body {
   padding: 16px 48px;
 }
 
+.restart button:hover,
 .start button:hover {
   background-color: var(--gray);
   color: var(--darker-green);
