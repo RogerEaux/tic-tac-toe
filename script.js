@@ -118,4 +118,15 @@ const game = (() => {
   return { start };
 })();
 
-game.start();
+const clickStart = () => {
+  const startButton = document.querySelector('.start');
+  const main = document.querySelector('.main');
+
+  main.style.visibility = 'visible';
+  startButton.remove();
+  game.start();
+};
+
+const startButton = document.querySelector('.start button');
+
+startButton.addEventListener('click', clickStart);
