@@ -141,7 +141,7 @@ const Game = (() => {
     }
     setTimeout(() => {
       GameBoard.checkAI(turn);
-    }, 1000);
+    }, 700);
   };
 
   const resetGame = () => {
