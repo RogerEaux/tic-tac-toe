@@ -34,8 +34,9 @@ body {
 }
 
 .header {
-  font-size: 1.5rem;
-  padding: 36px;
+  font-size: 1.2rem;
+  padding: 32px;
+  margin-top: 32px;
 }
 
 .main {
@@ -188,4 +189,11 @@ input:checked + .slider:before {
   font-size: 1.2rem;
   padding: 24px;
   font-weight: 700;
+}
+
+@media (min-width: 600px) {
+  .header {
+    font-size: 1.4rem;
+    margin-top: 16px;
+  }
 }
