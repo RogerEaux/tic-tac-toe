@@ -62,10 +62,13 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 4rem;
+  font-size: 8rem;
 }
 
-.x {
+.x,
+.o {
+  font-size: 4rem;
+  transition: 0.4s;
   color: var(--red);
 }
 
