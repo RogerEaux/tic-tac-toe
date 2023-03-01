@@ -121,6 +121,7 @@ const game = (() => {
       boardSpace.firstElementChild.removeAttribute('class');
       boardSpace.addEventListener('click', playRound);
     });
+    changeMessage("Let's play");
   };
 
   const start = () => {
